@@ -13,7 +13,7 @@ def index():
         user_id = request.form["user_id"]
         action = request.form["action"]
 
-        result = "Welcome" + str(user_id) + action
+        result = "Welcome " + str(user_id) + " " + action + " " + health()
 
     return render_template("index.html", result=result)
 
