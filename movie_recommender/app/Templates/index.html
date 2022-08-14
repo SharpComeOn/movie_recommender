@@ -1,0 +1,44 @@
+<html>
+<head>
+    <style>
+        h2 {
+            color: blue;
+            font-family: verdana;
+            font-size: 300%;
+        }
+        .center {
+            margin-left:auto;
+            margin-right:auto;
+        }
+    </style>
+</head>
+<body>
+<h2 style="text-align:center">Movie Recommender</h2>
+<div style="text-align:center">
+    <form method="POST" action="/">
+            <label >User ID:
+                <input type="number" name="user_id" value="">
+            </label>
+        <br><br>
+        <input type="submit" name="action" value="Get Default Recommendations">
+        <br><br>
+        {{ result }}
+        <br> <br>
+        <div>
+            <table class="center">
+                <tr>
+                    <td><input style="width:150px;" type="submit" name="action" value="Content based" /></td>
+                    <td><input style="width:150px;" type="submit" name="action" value="Collaborative filtering" /></td>
+                    <td><input style="width:150px;" type="submit" name="action" value="Memory based" /></td>
+                </tr>
+                <tr>
+                    <td><input style="width:150px;" type="submit" name="action" value="Model based" /></td>
+                    <td><input style="width:150px;" type="submit" name="action" value="Funk MF" /></td>
+                    <td><input style="width:150px;" type="submit" name="action" value="Deep learning MF" /></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+</div>
+</body>
+</html>
