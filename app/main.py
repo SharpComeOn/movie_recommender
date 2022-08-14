@@ -1,4 +1,4 @@
-# from src.calculator import Calculator
+from src.recommendater import Recommendater
 from flask import Flask, render_template, request
 
 # cal = Calculator()
@@ -15,11 +15,13 @@ def index():
 
         message = "Welcome " + str(user_id) + " " + action
 
-    return render_template("index.html", welcome_message=message, table_recommendation=health())
+    return render_template("index.html", welcome_message=message, tables=[method1().to_html(classes='data', header="true")], titles=method1().columns.values)
 
 @app.route("/health")
-def health():
-    return "I am healthy"
+def method1():
+    rec = Recommendater("123", "Collaborative filtering")
+    return rec.method1()
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

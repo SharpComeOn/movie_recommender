@@ -10,6 +10,10 @@
             margin-left:auto;
             margin-right:auto;
         }
+        .div_center {
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
@@ -38,7 +42,13 @@
                 </tr>
             </table>
         </div>
-        {{ table_recommendation }}
+        <br><br>
+        <div class="div_center">
+        {% for table in tables %}
+<!--        {{titles[loop.index]}}-->
+        {{ table|safe }}
+        {% endfor %}
+        </div>
     </form>
 </div>
 </body>
