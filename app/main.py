@@ -6,16 +6,16 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    result = ""
+    message = ""
     user_id = 0
     action = ""
     if request.method == "POST":
         user_id = request.form["user_id"]
         action = request.form["action"]
 
-        result = "Welcome " + str(user_id) + " " + action + " " + health()
+        message = "Welcome " + str(user_id) + " " + action
 
-    return render_template("index.html", result=result)
+    return render_template("index.html", welcome_message=message, table_recommendation=health())
 
 @app.route("/health")
 def health():
