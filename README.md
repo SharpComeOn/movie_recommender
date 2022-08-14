@@ -1,2 +1,1 @@
-"# movie_recommender" 
-Test35113
+This is movies recommendation system developed by Techlent 2022 summer 3.
