@@ -26,7 +26,7 @@ def method1():
 
 def method2():
     rec = Recommendater("456", "Content based")
-    return rec.method1()
+    return rec.method2()
 
 
 if __name__ == '__main__':
