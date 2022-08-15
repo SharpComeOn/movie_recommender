@@ -13,9 +13,9 @@ class Recommendater:
         return(pd.DataFrame(data))
 
     def method2(self):
-            data = {
-                "user id": [123, 234, 345],
-                "movie title": ['Inception', 'Toy Story', 'Gone With the Wind'],
-                "genres": ['11', '22', '33']
-            }
+        data = {
+            "user id": [123, 234, 345],
+            "movie title": ['Inception', 'Toy Story', 'Gone With the Wind'],
+            "genres": ['11', '22', '33']
+        }
         return(pd.DataFrame(data))
