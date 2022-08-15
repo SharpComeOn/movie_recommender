@@ -16,9 +16,9 @@ def index():
         message = "Welcome " + str(user_id) + ", you clicked button of " + action
 
     if (action == 'Content based'):
-        return render_template("index.html", welcome_message=message, tables=[method1().to_html(classes='data', header="true")], titles=method2().columns.values)
+        return render_template("index.html", welcome_message=message, tables=[method2(user_id).to_html(classes='data', header="true")], titles=method2(user_id).columns.values)
     else:
-        return render_template("index.html", welcome_message=message, tables=[method1().to_html(classes='data', header="true")], titles=method1().columns.values)
+        return render_template("index.html", welcome_message=message, tables=[method1(user_id).to_html(classes='data', header="true")], titles=method1(user_id).columns.values)
 
 def method1():
     rec = Recommendater("123", "Get Default Recommendations")
