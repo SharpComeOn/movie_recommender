@@ -20,12 +20,12 @@ def index():
     else:
         return render_template("index.html", welcome_message=message, tables=[method1(user_id).to_html(classes='data', header="true")], titles=method1(user_id).columns.values)
 
-def method1():
-    rec = Recommendater("123", "Get Default Recommendations")
+def method1(user_id):
+    rec = Recommendater(user_id, "Get Default Recommendations")
     return rec.method1()
 
-def method2():
-    rec = Recommendater("456", "Content based")
+def method2(user_id):
+    rec = Recommendater(user_id, "Content based")
     return rec.method2()
 
 
