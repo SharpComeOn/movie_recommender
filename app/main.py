@@ -13,7 +13,7 @@ def index():
         user_id = request.form["user_id"]
         action = request.form["action"]
 
-        message = "Welcome " + str(user_id) + " " + action
+        message = "Welcome " + str(user_id) + ", you clicked button of " + action
 
     return render_template("index.html", welcome_message=message, tables=[method1().to_html(classes='data', header="true")], titles=method1().columns.values)
 

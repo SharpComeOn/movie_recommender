@@ -7,8 +7,15 @@ class Recommendater:
     def method1(self):
         data = {
             "user id": [420, 380, 390],
-            "movie title": ['the godfather', 'Forrest Gump', 'The Dark Knight'],
+            "movie title": ['The godfather', 'Forrest Gump', 'The Dark Knight'],
             "genres": ['11', '22', '33']
         }
+        return(pd.DataFrame(data))
 
+    def method2(self):
+            data = {
+                "user id": [123, 234, 345],
+                "movie title": ['Inception', 'Toy Story', 'Gone With the Wind'],
+                "genres": ['11', '22', '33']
+            }
         return(pd.DataFrame(data))
