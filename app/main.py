@@ -22,12 +22,12 @@ def index():
 
 def method1(user_id):
     rec = Recommendater(user_id, "Get Default Recommendations")
-    return rec.method1()
+    return rec.method1(user_id)
 
 def method2(user_id):
     rec = Recommendater(user_id, "Content based")
-    return rec.method2()
+    return rec.method2(user_id)
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='127.0.0.1', port=5000)
