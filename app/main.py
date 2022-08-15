@@ -15,11 +15,18 @@ def index():
 
         message = "Welcome " + str(user_id) + ", you clicked button of " + action
 
-    return render_template("index.html", welcome_message=message, tables=[method1().to_html(classes='data', header="true")], titles=method1().columns.values)
+    if(action == 'Get Default Recommendations'):
+        return render_template("index.html", welcome_message=message, tables=[method1().to_html(classes='data', header="true")], titles=method1().columns.values)
+    elif(action == 'Content based'):
+        return render_template("index.html", welcome_message=message, tables=[method1().to_html(classes='data', header="true")], titles=method2().columns.values)
 
 @app.route("/health")
 def method1():
-    rec = Recommendater("123", "Collaborative filtering")
+    rec = Recommendater("123", "Get Default Recommendations")
+    return rec.method1()
+
+def method2():
+    rec = Recommendater("456", "Content based")
     return rec.method1()
 
 
