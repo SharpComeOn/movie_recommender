@@ -23,9 +23,9 @@ class Recommendater:
 
 
     def genres_base(self, movie_title):
+
         self.meta_data['genres'] = self.meta_data['genres'].fillna('[]').apply(literal_eval).apply(lambda x: [i['name'] for i in x] if isinstance(x, list) else []).apply(lambda x: ','.join([str(i) for i in x]))
         movies = self.meta_data[['id', 'title', 'genres']]
-        # Find the sets of combinations of genre
         tf = TfidfVectorizer(analyzer=lambda s: (c for i in range(1,4) for c in combinations(s.split(','), r=i)))
         tfidf_matrix = tf.fit_transform(movies['genres'])
         cosine_sim = cosine_similarity(tfidf_matrix)
@@ -38,7 +38,9 @@ class Recommendater:
         sim_scores = sim_scores[1:31]
         movie_indices = [i[0] for i in sim_scores]
         recommendations = titles.iloc[movie_indices].head(10)
-        return movies.merge(recommendations.to_frame(), left_index=True, right_index=True)[['title_x', 'genres']]
+        data = movies.merge(recommendations.to_frame(), left_index=True, right_index=True)[['title_x', 'genres']]
+        print(data)
+        return data
 
 
     def method1(self, user_id):
