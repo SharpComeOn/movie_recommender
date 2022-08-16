@@ -1,7 +1,5 @@
 from src.recommendater import Recommendater
 from flask import Flask, render_template, request
-
-# cal = Calculator()
 app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
@@ -11,18 +9,19 @@ def index():
     action = ""
     if request.method == "POST":
         user_id = request.form["user_id"]
+        movie_title = request.form["movie_title"]
         action = request.form["action"]
 
         message = "Welcome " + str(user_id) + ", you clicked button of " + action
 
     if (action == 'Content based'):
-        return render_template("index.html", welcome_message=message, tables=[method2(user_id).to_html(classes='data', header="true")], titles=method2(user_id).columns.values)
+        return render_template("index.html", welcome_message=message, tables=[genres_base(movie_title).to_html(classes='data', header="true")], titles=genres_base(movie_title).columns.values)
     else:
-        return render_template("index.html", welcome_message=message, tables=[method1(user_id).to_html(classes='data', header="true")], titles=method1(user_id).columns.values)
+        return render_template("index.html", welcome_message=message, tables=[method2(user_id).to_html(classes='data', header="true")], titles=method2(user_id).columns.values)
 
-def method1(user_id):
-    rec = Recommendater(user_id, "Get Default Recommendations")
-    return rec.method1(user_id)
+def genres_base(movie_title):
+    rec = Recommendater(movie_title)
+    return rec.genres_base(movie_title)
 
 def method2(user_id):
     rec = Recommendater(user_id, "Content based")
