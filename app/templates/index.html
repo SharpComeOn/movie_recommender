@@ -14,9 +14,28 @@
             display: flex;
             justify-content: center;
         }
+        .table_style {
+            font-size: 11pt;
+            font-family: Arial;
+            border-collapse: collapse;
+            border: 1px solid silver;
+
+        }
+        .table_style td, th {
+            padding: 5px;
+        }
+        .table_style tr:nth-child(even) {
+            background: #E0E0E0;
+        }
+        .table_style tr:hover {
+            background: silver;
+            cursor: pointer;
+        }
     </style>
 </head>
+<link rel="stylesheet" type="text/css" />
 <body>
+<img src="./image/banner.png" alt="HTML5 Icon" style="width:128px;height:128px;">
 <h2 style="text-align:center">Team 3 Movie Recommender</h2>
 <div style="text-align:center">
     <form method="POST" action="/">
@@ -28,22 +47,22 @@
             <input type="text" name="movie_title" value="">
         </label>
         <br><br>
-        <input type="submit" name="action" value="Get Default Recommendations">
-        <br><br>
+<!--        <input type="submit" name="action" value="Get Default Recommendations">-->
+
         {{ welcome_message }}
         <br> <br>
         <div>
             <table class="center">
                 <tr>
                     <td><input style="width:150px;" type="submit" name="action" value="Content based" /></td>
-                    <td><input style="width:150px;" type="submit" name="action" value="Collaborative filtering" /></td>
                     <td><input style="width:150px;" type="submit" name="action" value="Memory based" /></td>
-                </tr>
-                <tr>
                     <td><input style="width:150px;" type="submit" name="action" value="Model based" /></td>
-                    <td><input style="width:150px;" type="submit" name="action" value="Funk MF" /></td>
-                    <td><input style="width:150px;" type="submit" name="action" value="Deep learning MF" /></td>
                 </tr>
+<!--                <tr>-->
+<!--                    <td><input style="width:150px;" type="submit" name="action" value="Funk MF" /></td>-->
+<!--                    <td><input style="width:150px;" type="submit" name="action" value="Deep learning MF" /></td>-->
+<!--                    <td><input style="width:150px;" type="submit" name="action" value="" /></td>-->
+<!--                </tr>-->
             </table>
         </div>
         <br><br>
