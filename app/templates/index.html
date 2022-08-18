@@ -35,7 +35,9 @@
 </head>
 <link rel="stylesheet" type="text/css" />
 <body>
-<img src="./image/banner.png" alt="HTML5 Icon" style="width:128px;height:128px;">
+<div class="div_center">
+<img src="{{url_for('static', filename='image/banner.png')}}">
+</div>
 <h2 style="text-align:center">Team 3 Movie Recommender</h2>
 <div style="text-align:center">
     <form method="POST" action="/">
