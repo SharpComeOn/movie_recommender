@@ -21,16 +21,50 @@ def index():
     if (action == 'Content based'):
         if(movie_title != ""):
             df = genres_based(movie_title)
-            if(isinstance(df, pd.DataFrame)):
-                return render_template("index.html", welcome_message=message, tables=[df.to_html(classes='table_style', header="true")], titles=df.columns.values)
+            if(isinstance(df, pd.DataFrame) and df.empty != True):
+                return render_template("index.html",
+                                       welcome_message=message,
+                                       recommendation_tables=[df.to_html(classes='table_style', header="true")],
+                                       titles=df.columns.values)
+            else:
+                return render_template("index.html",
+                                       welcome_message="The movie name you entered is not in our system!")
         else:
-            return render_template("index.html", welcome_message="Please input a movie title to get recommendations of the same genres.")
-    elif (action == 'Memory based' and user_id.isnumeric() and int(user_id) > 0):
+            return render_template("index.html",
+                                   welcome_message="Please enter a movie title to get recommendations of the same genres.")
+    elif (action == 'Surprise SVD' and user_id.isnumeric() and int(user_id) > 0):
         df = memory_based(user_id)
         if isinstance(df, pd.DataFrame):
-            return render_template("index.html", welcome_message=message, tables=[df.to_html(classes='table_style', header="true")], titles=df.columns.values)
+            return render_template("index.html",
+                                   welcome_message=message,
+                                   recommendation_tables=[df.to_html(classes='table_style', header="true")],
+                                   user_ratings_tables=[get_user_ratings(user_id).to_html(classes='table_style', header="true")],
+                                   titles=df.columns.values)
+    elif (action == 'Content based2'):
+        if(movie_title != ""):
+            df = content_based(movie_title)
+            if(isinstance(df, pd.DataFrame) and df.empty != True):
+                return render_template("index.html",
+                                       welcome_message=message,
+                                       recommendation_tables=[df.to_html(classes='table_style', header="true")],
+                                       titles=df.columns.values)
+            else:
+                return render_template("index.html",
+                                       welcome_message="The movie name you entered is not in our system!")
+        else:
+            return render_template("index.html",
+                                   welcome_message="Please enter a movie title to get recommendations of the same genres.")
+    elif (action == 'Memory based2' and user_id.isnumeric() and int(user_id) > 0):
+        df = memory_based2(user_id)
+        if isinstance(df, pd.DataFrame):
+            return render_template("index.html",
+                                   welcome_message=message,
+                                   recommendation_tables=[df.to_html(classes='table_style', header="true")],
+                                   user_ratings_tables=[get_user_ratings(user_id).to_html(classes='table_style', header="true")],
+                                   titles=df.columns.values)
     else:
-        return render_template("index.html")
+        return render_template("index.html",
+                               welcome_message="Please enter a user id (from 1 to 100).")
 
 def genres_based(movie_title):
     rec = Recommendater()
@@ -40,6 +74,18 @@ def memory_based(user_id):
     rec = Recommendater(user_id, "memory based")
     return rec.memory_based(user_id)
 
+def memory_based2(user_id):
+    rec = Recommendater(user_id, "memory based")
+    return rec.memory_based2(user_id)
+
+def get_user_ratings(user_id):
+    rec = Recommendater()
+    data = rec.get_user_ratings(user_id)
+    return data
+
+def content_based(movie_title):
+    rec = Recommendater()
+    return rec.content_based(movie_title)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

@@ -42,7 +42,7 @@
 <div style="text-align:center">
     <form method="POST" action="/">
             <label >User ID:
-                <input type="number" name="user_id" value="">
+                <input type="number" name="user_id" value="" min="0" max="100">
             </label>
         <br><br>
         <label >Movie:
@@ -57,22 +57,28 @@
             <table class="center">
                 <tr>
                     <td><input style="width:150px;" type="submit" name="action" value="Content based" /></td>
-                    <td><input style="width:150px;" type="submit" name="action" value="Memory based" /></td>
+                    <td><input style="width:150px;" type="submit" name="action" value="Surprise SVD" /></td>
                     <td><input style="width:150px;" type="submit" name="action" value="Model based" /></td>
                 </tr>
-<!--                <tr>-->
-<!--                    <td><input style="width:150px;" type="submit" name="action" value="Funk MF" /></td>-->
-<!--                    <td><input style="width:150px;" type="submit" name="action" value="Deep learning MF" /></td>-->
-<!--                    <td><input style="width:150px;" type="submit" name="action" value="" /></td>-->
-<!--                </tr>-->
+                <tr>
+                    <td><input style="width:150px;" type="submit" name="action" value="Content based2" /></td>
+                    <td><input style="width:150px;" type="submit" name="action" value="Memory based2" /></td>
+                    <td><input style="width:150px;" type="submit" name="action" value="" /></td>
+                </tr>
             </table>
         </div>
         <br><br>
         <div class="div_center">
-        {% for table in tables %}
+        {% for table in recommendation_tables %}
 <!--        {{titles[loop.index]}}-->
         {{ table|safe }}
         {% endfor %}
+        </div>
+        <br><br>
+        <div class="div_center">
+            {% for table in user_ratings_tables %}
+            {{ table|safe }}
+            {% endfor %}
         </div>
     </form>
 </div>
