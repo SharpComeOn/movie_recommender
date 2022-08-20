@@ -35,7 +35,7 @@ class Recommendater:
         tf = TfidfVectorizer(analyzer=lambda s: (c for i in range(1,4) for c in combinations(s.split(','), r=i)))
         tfidf_matrix = tf.fit_transform(self.movies['genres'])
 
-        # compute similarity matix
+        # compute similarity matrix
         cosine_sim = cosine_similarity(tfidf_matrix)
 
         movies = self.movies.reset_index()
@@ -221,14 +221,3 @@ class Recommendater:
         else:
             return pd.DataFrame()
 
-
-
-
-
-    def method2(self, user_id):
-        data = {
-            "user id": [123, 234, 345],
-            "movie title": ['Inception', 'Toy Story', 'Gone With the Wind'],
-            "genres": [str(user_id) + '11', str(user_id) + '22', str(user_id) + '33']
-        }
-        return(pd.DataFrame(data))

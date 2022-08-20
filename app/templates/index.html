@@ -32,6 +32,7 @@
             cursor: pointer;
         }
     </style>
+
 </head>
 <link rel="stylesheet" type="text/css" />
 <body>
@@ -42,11 +43,12 @@
 <div style="text-align:center">
     <form method="POST" action="/">
             <label >User ID:
-                <input type="number" name="user_id" value="" min="0" max="100">
+<!--                <input type="number" name="user_id" value="" min="0" max="100">-->
+                    <select name="user_id" id="selectUserId" style="width:150px;"></select>
             </label>
         <br><br>
-        <label >Movie:
-            <input type="text" name="movie_title" value="">
+        <label >&nbsp; Movie:
+            <input type="text" name="movie_title" value="" style="width:150px;">
         </label>
         <br><br>
 <!--        <input type="submit" name="action" value="Get Default Recommendations">-->
@@ -58,23 +60,31 @@
                 <tr>
                     <td><input style="width:150px;" type="submit" name="action" value="Content based" /></td>
                     <td><input style="width:150px;" type="submit" name="action" value="Surprise SVD" /></td>
-                    <td><input style="width:150px;" type="submit" name="action" value="Model based" /></td>
+                    <td><input style="width:150px;" type="submit" name="action" value="Deep Learning" /></td>
                 </tr>
-                <tr>
-                    <td><input style="width:150px;" type="submit" name="action" value="Content based2" /></td>
-                    <td><input style="width:150px;" type="submit" name="action" value="Memory based2" /></td>
-                    <td><input style="width:150px;" type="submit" name="action" value="" /></td>
-                </tr>
+<!--                <tr>-->
+<!--                    <td><input style="width:150px;" type="submit" name="action" value="Content based2" /></td>-->
+<!--                    <td><input style="width:150px;" type="submit" name="action" value="Memory based2" /></td>-->
+<!--                    <td><input style="width:150px;" type="submit" name="action" value="" /></td>-->
+<!--                </tr>-->
             </table>
         </div>
-        <br><br>
+        <p>
+        <h3 style="text-align:center">
+            {{ recommendation_title }}
+        </h3>
+        </p>
         <div class="div_center">
         {% for table in recommendation_tables %}
 <!--        {{titles[loop.index]}}-->
         {{ table|safe }}
         {% endfor %}
         </div>
-        <br><br>
+        <p>
+        <h3 style="text-align:center">
+            {{ user_rating_title }}
+        </h3>
+        </p>
         <div class="div_center">
             {% for table in user_ratings_tables %}
             {{ table|safe }}
@@ -83,4 +93,12 @@
     </form>
 </div>
 </body>
+<script>
+    var selectUserId = document.getElementById("selectUserId");
+    var contents = "<option></option>";
+    for (let i = 1; i <= 100; i++) {
+        contents += "<option>" + i + "</option>";
+    }
+    selectUserId.innerHTML = contents;
+</script>
 </html>

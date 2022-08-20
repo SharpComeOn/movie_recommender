@@ -25,6 +25,7 @@ def index():
             if(isinstance(df, pd.DataFrame) and df.empty != True):
                 return render_template("index.html",
                                        welcome_message=message,
+                                       recommendation_title="Recommendations based on genres of " + movie_title,
                                        recommendation_tables=[df.to_html(classes='table_style', header="true")],
                                        titles=df.columns.values)
             else:
@@ -38,8 +39,10 @@ def index():
         if isinstance(df, pd.DataFrame):
             return render_template("index.html",
                                    welcome_message=message,
+                                   recommendation_title="Recommendations based on user " + user_id + "'s historical rating data:",
                                    recommendation_tables=[df.to_html(classes='table_style', header="true")],
                                    user_ratings_tables=[get_user_ratings(user_id).to_html(classes='table_style', header="true")],
+                                   user_rating_title="User " + user_id + "'s historical rating data",
                                    titles=df.columns.values)
     elif (action == 'Content based2'):
         if(movie_title != ""):
@@ -65,7 +68,7 @@ def index():
                                    titles=df.columns.values)
     else:
         return render_template("index.html",
-                               welcome_message="Please enter a user id (from 1 to 100).")
+                               welcome_message="Please select a User ID or enter a movie title for recommendations.")
 
 def genres_based(movie_title):
     return rec.genres_based(movie_title)
