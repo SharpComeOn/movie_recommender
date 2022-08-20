@@ -49,9 +49,9 @@ class Recommendater:
             movie_indices = [i[0] for i in sim_scores]
             recommendations = titles.iloc[movie_indices].head(10)
             data = movies.merge(recommendations.to_frame(), left_index=True, right_index=True)
-            data.rename(columns={'title_x': 'Movie Title', 'genres': 'Genres', 'vote_average': 'Vote Average', 'homepage': 'Home Page'}, inplace=True)
+            data.rename(columns={'title_x': 'Movie Title', 'genres': 'Genres', 'vote_average': 'Vote Average'}, inplace=True)
             data.reset_index(drop=True, inplace=True)
-            return data[['Movie Title', 'Genres', 'Vote Average', 'Home Page']]
+            return data[['Movie Title', 'Genres', 'Vote Average']]
         else:
             return pd.DataFrame()
 
@@ -99,9 +99,9 @@ class Recommendater:
                 df_recommendation = df_recommendation.append({'id': item[0]}, ignore_index=True)
 
             result = df_recommendation.merge(self.movies, on='id', how='left')
-            result.rename(columns={'title': 'Movie Title', 'genres': 'Genres', 'vote_average': 'Vote Average', 'homepage': 'Home Page'}, inplace=True)
+            result.rename(columns={'title': 'Movie Title', 'genres': 'Genres', 'vote_average': 'Vote Average'}, inplace=True)
 
-        return result[['Movie Title', 'Genres', 'Vote Average', 'Home Page']]
+        return result[['Movie Title', 'Genres', 'Vote Average']]
 
     def top_k_items_for_user(user_id, top_k, corr_mat):
         top_items = corr_mat[:,user_id-1].argsort()[-top_k:][::-1]
@@ -117,11 +117,12 @@ class Recommendater:
         # init user-item matrix
         mat = csr_matrix((data, (row, col)))
         mat.eliminate_zeros()
+
         item_corr_mat = cosine_similarity(mat)
 
         # similar_items = self.top_k_items_for_user(1, top_k = 10, corr_mat = item_corr_mat)
 
-        similar_items = item_corr_mat[:, int(user_id)-1].argsort()[-10:][::-1]
+        similar_items = item_corr_mat[:, int(user_id)].argsort()[-10:][::-1]
 
         return pd.DataFrame()
 
@@ -171,7 +172,9 @@ class Recommendater:
     def get_user_ratings(self, user_id):
         data = self.ratings_small[self.ratings_small['userId']==int(user_id)]
         result = pd.merge(left=data, right=self.movies, left_on='movieId', right_on='id')
-        return result[['userId', 'movieId', 'rating', 'title', 'genres', 'timestamp']]
+        result.rename(columns={'userId': 'User ID', 'movieId': 'Movie ID', 'rating': 'Rating', 'title': 'Movie Title', 'genres': 'Genres'}, inplace=True)
+
+        return result[['User ID', 'Movie ID', 'Rating', 'Movie Title', 'Genres']]
 
 
     def content_based(self, movie_title):
@@ -212,9 +215,9 @@ class Recommendater:
             recommendations = titles.iloc[movie_indices].head(10)
 
             data = movies.merge(recommendations.to_frame(), left_index=True, right_index=True)
-            data.rename(columns={'title_x': 'Movie Title', 'genres': 'Genres', 'vote_average': 'Vote Average', 'homepage': 'Home Page'}, inplace=True)
+            data.rename(columns={'title_x': 'Movie Title', 'genres': 'Genres', 'vote_average': 'Vote Average'}, inplace=True)
             data.reset_index(drop=True, inplace=True)
-            return data[['Movie Title', 'Genres', 'Vote Average', 'Home Page']]
+            return data[['Movie Title', 'Genres', 'Vote Average']]
         else:
             return pd.DataFrame()
 

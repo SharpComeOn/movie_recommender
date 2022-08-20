@@ -2,6 +2,7 @@ import pandas as pd
 from src.recommendater import Recommendater
 from flask import Flask, render_template, request
 app = Flask(__name__)
+rec = Recommendater()
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -67,24 +68,19 @@ def index():
                                welcome_message="Please enter a user id (from 1 to 100).")
 
 def genres_based(movie_title):
-    rec = Recommendater()
     return rec.genres_based(movie_title)
 
 def memory_based(user_id):
-    rec = Recommendater(user_id, "memory based")
     return rec.memory_based(user_id)
 
 def memory_based2(user_id):
-    rec = Recommendater(user_id, "memory based")
     return rec.memory_based2(user_id)
 
 def get_user_ratings(user_id):
-    rec = Recommendater()
     data = rec.get_user_ratings(user_id)
     return data
 
 def content_based(movie_title):
-    rec = Recommendater()
     return rec.content_based(movie_title)
 
 if __name__ == '__main__':
